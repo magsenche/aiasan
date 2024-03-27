@@ -1,0 +1,32 @@
+[project]
+name = "aiasan"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [{ name = "Magsen Chebini", email = "magsen.che@gmail.com" }]
+dependencies = [
+    "aiasan @ file:///${PROJECT_ROOT}/",
+    "black>=24.3.0",
+    "pyautogen>=0.2.20",
+    "colorlog>=6.8.2",
+    "langchain>=0.1.13",
+    "apify-client>=1.6.4",
+    "langchain-openai>=0.1.1",
+    "bs4>=0.0.2",
+    "playwright>=1.42.0",
+    "beautifulsoup4>=4.12.3",
+]
+requires-python = "==3.12.*"
+readme = "README.md"
+license = { text = "GPL-3.0-or-later" }
+
+[tool.pdm]
+distribution = false
+
+[tool.pdm.scripts]
+_.env_file = ".env"
+
+[tool.black]
+line-length = 88
+
+[tool.isort]
+profile = "black"
