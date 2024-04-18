@@ -1,10 +1,12 @@
+import functools
 import logging
+from typing import Any, Callable, Optional
 
 import colorlog
+from crewai_tools import Tool, tool
 
 
-
-def logger(name, level=logging.INFO):
+def logger(name: str, level=logging.INFO) -> logging.Logger:
     log = logging.getLogger(name)
     log.setLevel(level)
     handler = logging.StreamHandler()
@@ -34,3 +36,25 @@ def logger(name, level=logging.INFO):
     log.addHandler(handler)
 
     return log
+
+
+def partial(func: Callable) -> Callable:
+    def wrapper(*args, **kwargs):
+        new_func = functools.partial(func, *args, **kwargs)
+        new_func.__name__ = getattr(func, "__name__", "")
+        new_func.__doc__ = getattr(func, "__doc__", "")
+        annotations = {}
+        for name, annotation in getattr(func, "__annotations__", {}).items():
+            if name not in kwargs:
+                annotations[name] = annotation
+        new_func.__annotations__ = annotations
+        return new_func
+
+    return wrapper
+
+
+def get_crewai_tool(
+    tool_func: Callable, tool_name: Optional[str] = None, **kwargs: Any
+) -> Tool:
+    partial_tool_func = partial(tool_func)(**kwargs)
+    return tool(tool_name)(partial_tool_func)
