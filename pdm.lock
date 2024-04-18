@@ -5,11 +5,11 @@
 groups = ["default"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:e0439c1aef1f1f86300f7e680f3a49b8159f935119616ebf69b70b2a22fb7dc7"
+content_hash = "sha256:a8111eed6dbc9804c1bd83ead3f56c6ce67a7dcbe02381ba9dd0f0d0eb6f1c85"
 
 [[package]]
 name = "aiasan"
-version = "0.1.0"
+version = "2024.4.18"
 requires_python = "==3.12.*"
 path = "./."
 summary = "Default template for PDM package"
@@ -749,7 +749,7 @@ files = [
 
 [[package]]
 name = "embedchain"
-version = "0.1.99"
+version = "0.1.100"
 requires_python = "<=3.13,>=3.9"
 summary = "Simplest open source retrieval (RAG) framework"
 groups = ["default"]
@@ -772,27 +772,27 @@ dependencies = [
     "tiktoken<0.6.0,>=0.5.2",
 ]
 files = [
-    {file = "embedchain-0.1.99-py3-none-any.whl", hash = "sha256:1614f580005d7edecd5fa1651013df0dc7f0aabc2ac7b61cefb041f4e92a8769"},
-    {file = "embedchain-0.1.99.tar.gz", hash = "sha256:df4b7c59c1bc6b36fae9de04736ca90609e86d8fdea55771dbc052709a7680a3"},
+    {file = "embedchain-0.1.100-py3-none-any.whl", hash = "sha256:ef6050c018da2e08ea4d7790f850831189b9de6c3494559a7dc1032b0ca6480b"},
+    {file = "embedchain-0.1.100.tar.gz", hash = "sha256:9462ba4a211143c0375deabe371753f8f3e505b11e6ce5dbf174680d68679704"},
 ]
 
 [[package]]
 name = "embedchain"
-version = "0.1.99"
+version = "0.1.100"
 extras = ["github", "youtube"]
 requires_python = "<=3.13,>=3.9"
 summary = "Simplest open source retrieval (RAG) framework"
 groups = ["default"]
 dependencies = [
     "PyGithub<2.0.0,>=1.59.1",
-    "embedchain==0.1.99",
+    "embedchain==0.1.100",
     "gitpython<4.0.0,>=3.1.38",
     "youtube-transcript-api<0.7.0,>=0.6.1",
     "yt-dlp<2024.0.0,>=2023.11.14",
 ]
 files = [
-    {file = "embedchain-0.1.99-py3-none-any.whl", hash = "sha256:1614f580005d7edecd5fa1651013df0dc7f0aabc2ac7b61cefb041f4e92a8769"},
-    {file = "embedchain-0.1.99.tar.gz", hash = "sha256:df4b7c59c1bc6b36fae9de04736ca90609e86d8fdea55771dbc052709a7680a3"},
+    {file = "embedchain-0.1.100-py3-none-any.whl", hash = "sha256:ef6050c018da2e08ea4d7790f850831189b9de6c3494559a7dc1032b0ca6480b"},
+    {file = "embedchain-0.1.100.tar.gz", hash = "sha256:9462ba4a211143c0375deabe371753f8f3e505b11e6ce5dbf174680d68679704"},
 ]
 
 [[package]]
@@ -2649,7 +2649,7 @@ files = [
 
 [[package]]
 name = "pyright"
-version = "1.1.358"
+version = "1.1.359"
 requires_python = ">=3.7"
 summary = "Command line wrapper for pyright"
 groups = ["default"]
@@ -2657,8 +2657,8 @@ dependencies = [
     "nodeenv>=1.6.0",
 ]
 files = [
-    {file = "pyright-1.1.358-py3-none-any.whl", hash = "sha256:0995b6a95eb11bd26f093cd5dee3d5e7258441b1b94d4a171b5dc5b79a1d4f4e"},
-    {file = "pyright-1.1.358.tar.gz", hash = "sha256:185524a8d52f6f14bbd3b290b92ad905f25b964dddc9e7148aad760bd35c9f60"},
+    {file = "pyright-1.1.359-py3-none-any.whl", hash = "sha256:5582777be7eab73512277ac7da7b41e15bc0737f488629cb9babd96e0769be61"},
+    {file = "pyright-1.1.359.tar.gz", hash = "sha256:f0eab50f3dafce8a7302caeafd6a733f39901a2bf5170bb23d77fd607c8a8dbc"},
 ]
 
 [[package]]
