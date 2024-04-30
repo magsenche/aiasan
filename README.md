@@ -16,6 +16,12 @@ An innovative local AI-powered chat application that enables users to engage wit
 - integrate your documents (markdown or pdf)
 - converse with your documents via the chat
 
+
+
+https://github.com/magsenche/aiasan/assets/102949971/998403d0-8e0e-4ca6-b4cd-dec6bcf11c2a
+
+
+
 ## Library
 
 1. **Tools**: A ready-to-use toolbox for AI agents.
@@ -47,4 +53,4 @@ OUTPUT_FOLDER = "outputs"
 - [ ] askzono: enable loading an existing vectorstore
 
 ### Documentation
-- [ ] askzono: video demo
+- [x] askzono: video demo
