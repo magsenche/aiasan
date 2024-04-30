@@ -18,6 +18,8 @@ dependencies = [
     "langchain-openai>=0.0.5",
     "crewai-tools>=0.1.7",
     "aiasan @ file:///${PROJECT_ROOT}/",
+    "streamlit>=1.33.0",
+    "pypdf>=3.17.4",
 ]
 requires-python = "==3.12.*"
 readme = "README.md"
@@ -36,6 +38,7 @@ getter = "src.aiasan:get_version"
 
 [tool.pdm.scripts]
 _.env_file = ".env"
+askzono = "python -m streamlit run cookbook/askzono.py"
 
 [tool.black]
 line-length = 88

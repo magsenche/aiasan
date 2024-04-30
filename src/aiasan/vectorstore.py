@@ -3,10 +3,12 @@ import pickle
 import uuid
 from typing import Optional
 
+from faiss import IndexFlatL2
 from langchain.document_loaders.directory import DirectoryLoader
 from langchain.document_loaders.markdown import UnstructuredMarkdownLoader
 from langchain.text_splitter import MarkdownTextSplitter
 from langchain.vectorstores.faiss import FAISS
+from langchain_community.docstore.in_memory import InMemoryDocstore
 from langchain_core.embeddings import Embeddings
 
 
@@ -51,6 +53,12 @@ class VectorStore:
                 source_to_docstore_id[source] = [id]
         return cls(store_path, embedding, vectorstore, source_to_docstore_id)
 
+    @classmethod
+    def initialize_empty(cls, store_path: pathlib.Path, embedding: Embeddings):
+        n_embed = len(embedding.embed_query("hello"))
+        vectorstore = FAISS(embedding, IndexFlatL2(n_embed), InMemoryDocstore(), {})
+        return cls(store_path, embedding, vectorstore)
+
     def load(self):
         self.vectorstore = FAISS.load_local(
             self.store_path,
@@ -80,18 +88,19 @@ class VectorStore:
         for fp in file_paths:
             self.delete_file(fp)
 
-    def add_file(self, source: pathlib.Path):
-        splitted_text = self.splitter.split_text(source.read_text())
-        metadatas = [{"source": str(source)} for _ in splitted_text]
-        text_ids = get_ids(splitted_text)
-        self.vectorstore.add_texts(
-            texts=splitted_text, metadatas=metadatas, ids=text_ids
-        )
-        for doc, id in zip(splitted_text, text_ids):
-            if str(source) in self.source_to_docstore_id:
-                self.source_to_docstore_id[str(source)].append(id)
+    def add_texts(self, texts: list[str], sources: list[str]):
+        metadatas = [{"source": source} for source in sources]
+        text_ids = get_ids(texts)
+        self.vectorstore.add_texts(texts, metadatas, text_ids)
+        for source, id in zip(sources, text_ids):
+            if source in self.source_to_docstore_id:
+                self.source_to_docstore_id[source].append(id)
             else:
-                self.source_to_docstore_id[str(source)] = [id]
+                self.source_to_docstore_id[source] = [id]
+
+    def add_file(self, source_path: pathlib.Path):
+        splitted_text = self.splitter.split_text(source_path.read_text())
+        self.add_texts(splitted_text, [str(source_path) for _ in splitted_text])
 
     def add_files(self, file_paths: list[pathlib.Path]):
         for fp in file_paths:

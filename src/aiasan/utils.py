@@ -1,9 +1,13 @@
+import base64
 import functools
+import io
 import logging
 from typing import Any, Callable, Optional
 
 import colorlog
+import streamlit as st
 from crewai_tools import Tool, tool
+from streamlit.runtime.uploaded_file_manager import UploadedFile
 
 
 def logger(name: str, level=logging.INFO) -> logging.Logger:
@@ -58,3 +62,24 @@ def get_crewai_tool(
 ) -> Tool:
     partial_tool_func = partial(tool_func)(**kwargs)
     return tool(tool_name)(partial_tool_func)
+
+
+def display(file: UploadedFile):
+    if file.type == "application/pdf":
+        display_pdf(file)
+    elif file.type == "application/octet-stream":
+        display_md(file)
+
+
+def display_md(file: io.BytesIO):
+    markdown_content = file.read().decode("utf-8")
+    st.markdown(markdown_content, unsafe_allow_html=True)
+
+
+def display_pdf(file: io.BytesIO):
+    base64_pdf = base64.b64encode(file.read()).decode("utf-8")
+    pdf_display = f"""<iframe src="data:application/pdf;base64,{base64_pdf}" width="400" height="100%" type="application/pdf"
+                        style="height:100vh; width:100%"
+                    >
+                    </iframe>"""
+    st.markdown(pdf_display, unsafe_allow_html=True)
